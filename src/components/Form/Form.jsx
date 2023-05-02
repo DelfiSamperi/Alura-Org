@@ -1,6 +1,7 @@
 import CampoTexto from "../CampoTexto/CampoTexto";
 import "./Form.css";
 import ListaOpciones from "../../ListaOpciones/ListaOpciones";
+import Boton from "../BotonForm/boton";
 
 const Form = () => {
     return (
@@ -11,6 +12,7 @@ const Form = () => {
                 <CampoTexto titulo="Puesto" placeholder="Ingresar email" />
                 <CampoTexto titulo="Foto" placeholder="Ingresar url de imagen" />
                 <ListaOpciones />
+                <Boton />    
             </form>
         </div>
     )
