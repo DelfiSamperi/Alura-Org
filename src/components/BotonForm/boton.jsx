@@ -1,8 +1,8 @@
 import "./boton.css";
 
-const Boton = () => {
+const Boton = (props) => {
     return (
-        <button className="button">Crear</button>
+        <button className="boton">{props.texto}</button>
     )
 }
 

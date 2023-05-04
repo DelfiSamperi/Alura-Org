@@ -1,18 +1,56 @@
 import CampoTexto from "../CampoTexto/CampoTexto";
+import { useState } from 'react';
 import "./Form.css";
-import ListaOpciones from "../../ListaOpciones/ListaOpciones";
+import ListaOpciones from "../ListaOpciones/ListaOpciones";
 import Boton from "../BotonForm/boton";
 
-const Form = () => {
+const Form = (props) => {
+
+    const [nombre, setNombre] = useState("");
+    const [puesto, setPuesto] = useState("");
+    const [foto, setFoto] = useState("");
+    const [equipo, setEquipo] = useState("")
+    
+    const enviarForm = (event) => {
+        event.preventDefault();
+        let datosEnviados = {
+            nombre,
+            puesto,
+            foto,
+            equipo
+        }
+    }
+ 
     return (
         <div className="formulario">
-            <form>
+            <form onSubmit={enviarForm}>
             <h2>Rellena el formulario para crear colaborador.</h2>
-                <CampoTexto titulo="Nombre" placeholder="Ingresar nombre" />
-                <CampoTexto titulo="Puesto" placeholder="Ingresar email" />
-                <CampoTexto titulo="Foto" placeholder="Ingresar url de imagen" />
-                <ListaOpciones />
-                <Boton />    
+                <CampoTexto 
+                    titulo="Nombre" 
+                    placeholder="Ingresar nombre" 
+                    required={true} 
+                    valor={nombre} 
+                    actualizarValor={setNombre} 
+                />
+                <CampoTexto 
+                    titulo="Puesto" 
+                    placeholder="Ingresar email" 
+                    required
+                    valor={puesto} 
+                    actualizarValor={setPuesto} 
+                />
+                <CampoTexto 
+                    titulo="Foto" 
+                    placeholder="Ingresar url de imagen"
+                    valor={foto} 
+                    actualizarValor={setFoto}
+                />
+                <ListaOpciones 
+                    valor={equipo} 
+                    actualizarValor={setEquipo}
+                    equipos={props.equipos}
+                />
+                <Boton texto="Crear"/>    
             </form>
         </div>
     )
