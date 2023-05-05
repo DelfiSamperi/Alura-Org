@@ -15,6 +15,10 @@
 
 .org img {
 position: absolute;
-right: 10%;
+right: 30%;
 cursor: pointer;
+}
+
+.org img:hover{
+    box-shadow: 4px solid #565968;
 }

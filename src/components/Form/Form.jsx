@@ -11,6 +11,8 @@ const Form = (props) => {
     const [foto, setFoto] = useState("");
     const [equipo, setEquipo] = useState("")
     
+    const { registrarColaborador } = props;
+
     const enviarForm = (event) => {
         event.preventDefault();
         let datosEnviados = {
@@ -19,6 +21,8 @@ const Form = (props) => {
             foto,
             equipo
         }
+        props.registrarColaborador(datosEnviados);
+        
     }
  
     return (
@@ -34,7 +38,7 @@ const Form = (props) => {
                 />
                 <CampoTexto 
                     titulo="Puesto" 
-                    placeholder="Ingresar email" 
+                    placeholder="Ingresar puesto" 
                     required
                     valor={puesto} 
                     actualizarValor={setPuesto} 
