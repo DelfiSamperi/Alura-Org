@@ -1,14 +1,17 @@
 import './equipo.css';
 import Colaborador from '../Colaborador/Colaborador';
+//paquete para opacar el color npm i hex-to-rgba
+//lo aplicamos en el backgroundColor (es una funcion con dos args)
+import hexToRgba from 'hex-to-rgba';
 
 const Equipo = (props) => {
-    const { colorDestaque, colorFondo, titulo } = props.datos;
+    const { colorDestaque, colorFondo, titulo, id } = props.datos;
     //pasando colaboradores como props
-    const { colaboradores } = props;
+    const { colaboradores, eliminarColab, actualizarColor, like } = props;
 
     //ESTILOS
     const BackgroundColor = {
-        backgroundColor: colorFondo /*inline styling */
+        backgroundColor: hexToRgba(colorDestaque, 0.6)  /*inline styling */
     }
     const EstiloTitulo = { borderColor: colorDestaque };
     /* <h3 style={ borderColor: colorDestaque } > */
@@ -16,16 +19,28 @@ const Equipo = (props) => {
     return (
         <>
             {colaboradores.length > 0 &&
-                <div className='equipo' style={BackgroundColor} >
+                <section className='equipo' style={BackgroundColor} >
+                    <input
+                        type='color'
+                        className='input-color'
+                        value={colorDestaque} 
+                        onChange={(event) => {
+                            actualizarColor(event.target.value, id)
+                        }}
+                    />
+                    
                     <h3 style={EstiloTitulo}> {titulo}</h3>
                     <div className="colaboradores" >
                         {colaboradores.map((colaborador, index) => <Colaborador 
                             datos={colaborador} 
                             key={index}
-                            colorDestaque={colorDestaque}  />
+                            colorDestaque={colorDestaque}
+                            eliminarCol={eliminarColab}
+                            like={like} 
+                            />
                         )}
                     </div>
-                </div>
+                </section>
             }
         </>
     )

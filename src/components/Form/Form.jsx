@@ -1,4 +1,4 @@
-import CampoTexto from "../CampoTexto/CampoTexto";
+import InputForm from "../InputForm/InputForm";
 import { useState } from 'react';
 import "./Form.css";
 import ListaOpciones from "../ListaOpciones/ListaOpciones";
@@ -9,41 +9,48 @@ const Form = (props) => {
     const [nombre, setNombre] = useState("");
     const [puesto, setPuesto] = useState("");
     const [foto, setFoto] = useState("");
-    const [equipo, setEquipo] = useState("")
-    
-    const { registrarColaborador } = props;
+    const [equipo, setEquipo] = useState("");
+    const [titulo, setTitulo] = useState("");
+    const [color, setColor] = useState("");
 
-    const enviarForm = (event) => {
+    const { registrarColaborador, crearEquipo } = props;
+
+    const enviarFormColaboradores = (event) => {
         event.preventDefault();
+        console.log('envio formulario');
         let datosEnviados = {
             nombre,
             puesto,
             foto,
             equipo
         }
-        props.registrarColaborador(datosEnviados);
-        
+        registrarColaborador(datosEnviados);
+    }
+
+    const enviarFormEquipos = (e) => {
+        e.preventDefault();
+        crearEquipo({ titulo, colorDestaque: color });
     }
  
     return (
-        <div className="formulario">
-            <form onSubmit={enviarForm}>
+        <section className="formulario">
+            <form onSubmit={enviarFormColaboradores}>
             <h2>Rellena el formulario para crear colaborador.</h2>
-                <CampoTexto 
+                <InputForm 
                     titulo="Nombre" 
                     placeholder="Ingresar nombre" 
                     required={true} 
                     valor={nombre} 
                     actualizarValor={setNombre} 
                 />
-                <CampoTexto 
+                <InputForm 
                     titulo="Puesto" 
                     placeholder="Ingresar puesto" 
                     required
                     valor={puesto} 
                     actualizarValor={setPuesto} 
                 />
-                <CampoTexto 
+                <InputForm 
                     titulo="Foto" 
                     placeholder="Ingresar url de imagen"
                     valor={foto} 
@@ -56,7 +63,26 @@ const Form = (props) => {
                 />
                 <Boton texto="Crear"/>    
             </form>
-        </div>
+            <form onSubmit={enviarFormEquipos}>
+            <h2>Rellena el formulario para crear un nuevo equipo.</h2>
+                <InputForm 
+                    titulo="Título" 
+                    placeholder="Ingresar título" 
+                    required={true} 
+                    valor={titulo} 
+                    actualizarValor={setTitulo} 
+                />
+                <InputForm 
+                    titulo="Color" 
+                    placeholder="Ingresar el color en Hex" 
+                    required
+                    valor={color} 
+                    actualizarValor={setColor}
+                    type='color' 
+                />
+                <Boton texto='Registrar equipo' />
+                </form>
+        </section>
     )
 }
 

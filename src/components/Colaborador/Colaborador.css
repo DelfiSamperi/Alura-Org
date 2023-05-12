@@ -42,3 +42,9 @@
     font-weight: 400;
     margin: 0;
 }
+
+.eliminar {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}
